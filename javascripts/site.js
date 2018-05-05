@@ -100,11 +100,12 @@ new Vue({
 		onSubmit(){
 			console.log(this.input.connpass_url);
 			getList(`${this.input.connpass_url}/participation`, (result, err) => {
+				console.log(err);
 				if( err ){
 					return this.$notify.error({ title: 'Error', message: '読み込みに失敗しました。' });
 				}
-				localStorage.setItem('input.connpass_url', JSON.stringify(this.connpass_url));
-				this.$notify.error({ title: 'Error', message: '読み込みに失敗しました。' });
+				localStorage.setItem('input.connpass_url', JSON.stringify(this.input.connpass_url));
+				this.$notify.error({ title: 'Success', message: '読み込みに成功しました。' });
 				console.log(result);
 				this.list = build(result);
 			});
