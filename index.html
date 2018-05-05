@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>
+受付ちゃん
+</title>
+<link href='https://unpkg.com/element-ui/lib/theme-chalk/index.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+<meta charset='utf-8'>
+<meta content='IE=edge' http-equiv='X-UA-Compatible'>
+<meta content='width=device-width, initial-scale=1' name='viewport'>
+<link href='images/favicon.ico' rel='shortcut icon' type='image/x-icon'>
+<body>
+<h1></h1>
+<div id='app'>
+<el-row justify='center' style='margin-top: 30px' type='flex'>
+<h1>
+受付ちゃん
+</h1>
+</el-row>
+<el-row justify='center' style='margin-top: 15px' type='flex'>
+<el-col :span='12'>
+<el-form @submit.native.prevent='onSubmit' form='input' style='margin-top: 15px;'>
+<el-form-item>
+<el-input placeholder='Please input Connpass URL' v-model='input.connpass_url'>
+<el-button @click='onSubmit' icon='el-icon-search' slot='append'></el-button>
+</el-input>
+</el-form-item>
+</el-form>
+<el-collapse>
+<el-collapse-item title='オプション'>
+<el-checkbox v-model='option.all_view.value'>
+{{ option.all_view.label }}
+</el-checkbox>
+</el-collapse-item>
+<el-collapse-item title='markdown' v-if='list'>
+<pre>{{ this.markdown() }}</pre>
+</el-collapse-item>
+</el-collapse>
+<transition name='fade'>
+<div v-for='(users, type) in list'>
+<h1>{{ type }}</h1>
+<div v-for='user in users'>
+<transition name='fade'>
+<div v-if='user.todos.find(it =&gt; it.checked == false) || option.all_view.value'>
+<el-checkbox v-model='user.checked'>
+<h2>{{ user.display_name }}</h2>
+</el-checkbox>
+<transition name='fade'>
+<ul v-if='user.checked'>
+<div v-for='todo in user.todos'>
+<el-checkbox v-model='todo.checked'>
+<h3>{{ todo.label }}</h3>
+</el-checkbox>
+</div>
+</ul>
+</transition>
+</div>
+</transition>
+</div>
+</div>
+</transition>
+<div v-if='debug'>
+<pre>{{ this.list }}</pre>
+</div>
+
+</el-col>
+</el-row>
+</div>
+<link href='stylesheets/site.css' rel='stylesheet'>
+<script src='https://unpkg.com/vue/dist/vue.js'></script>
+<script src='https://unpkg.com/element-ui/lib/index.js'></script>
+<script src='https://unpkg.com/element-ui/lib/umd/locale/ja.js'></script>
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='javascripts/site.js'></script>
+</body>
+</head>
+</html>

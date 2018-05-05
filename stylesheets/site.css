@@ -1,0 +1,15 @@
+.fade-enter-active, .fade-leave-active {
+  -webkit-transition: opacity .5s;
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+pre {
+	padding: 0.5em 1em;
+	margin: 2em 0;
+	border: solid 1px #6091d3;/*線*/ border-radius: 10px;/*角の丸み*/
+	white-space: pre-wrap ;
+}
+
